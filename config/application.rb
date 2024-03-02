@@ -28,6 +28,8 @@ module MoqaOnRails
       g.orm :mongoid
     end
 
+    config.filter_parameters += [:password, :password_confirmation]
+
     config.time_zone = ActiveSupport::TimeZone.new('America/Fortaleza')
 
     # Settings in config/environments/* take precedence over those specified here.

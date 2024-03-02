@@ -1,9 +1,19 @@
 class User
   include Mongoid::Document
+  include Mongoid::Timestamps
+
+  has_and_belongs_to_many :roles
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  devise :database_authenticatable,
+         :registerable,
+         :recoverable, 
+         :rememberable, 
+         :validatable,
+         :trackable,
+         :lockable,
+         :jwt_authenticatable, jwt_revocation_strategy: Devise::JWT::RevocationStrategies::Denylist
 
   ## Database authenticatable
   field :email,              type: String, default: ""
@@ -17,11 +27,11 @@ class User
   field :remember_created_at, type: Time
 
   ## Trackable
-  # field :sign_in_count,      type: Integer, default: 0
-  # field :current_sign_in_at, type: Time
-  # field :last_sign_in_at,    type: Time
-  # field :current_sign_in_ip, type: String
-  # field :last_sign_in_ip,    type: String
+  field :sign_in_count,      type: Integer, default: 0
+  field :current_sign_in_at, type: Time
+  field :last_sign_in_at,    type: Time
+  field :current_sign_in_ip, type: String
+  field :last_sign_in_ip,    type: String
 
   ## Confirmable
   # field :confirmation_token,   type: String
@@ -30,8 +40,11 @@ class User
   # field :unconfirmed_email,    type: String # Only if using reconfirmable
 
   ## Lockable
-  # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
-  # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
-  # field :locked_at,       type: Time
-  include Mongoid::Timestamps
+  field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
+  field :unlock_token,    type: String # Only if unlock strategy is :email or :both
+  field :locked_at,       type: Time
+
+  def has_role?(role_sym)
+    roles.any? { |r| r.name.underscore.to_sym == role_sym }
+  end
 end
