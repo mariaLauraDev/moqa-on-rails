@@ -1,0 +1,2 @@
+module AirQualityLogsHelper
+end

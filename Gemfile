@@ -51,3 +51,16 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'dotenv-rails'
+
+# #--- gems for authentication & authorization ---##
+gem 'cancancan'
+gem 'devise'
+gem 'devise-jwt'
+
+# HTTP
+gem 'rest-client'
+
+# Rack middleware for blocking & throttling abusive requests
+# TODO: validar com o Jairo se vai querer usar isso https://github.com/rack/rack-attack
+#gem 'rack-attack'
+#gem 'rack-cors' #https://github.com/cyu/rack-cors
