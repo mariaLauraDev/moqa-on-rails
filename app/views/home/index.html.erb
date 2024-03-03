@@ -5,6 +5,7 @@
   <thead>
     <tr>
       <th>Path</th>
+      <th> Method</th>
       <th>Controller#Action</th>
     </tr>
   </thead>
@@ -12,6 +13,7 @@
     <% @routes.each do |route| %>
       <tr>
         <td><%= route[:path] %></td>
+        <td><%= route %></td>
         <td><%= "#{route[:controller]}##{route[:action]}" %></td>
       </tr>
     <% end %>
