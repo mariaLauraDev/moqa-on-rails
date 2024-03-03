@@ -5,6 +5,11 @@
     "email": "marialauradev@gmail.com"
   },
   "private": true,
+  "babel": {
+    "presets": [
+      "./node_modules/@rails/webpacker/package/babel/preset.js"
+    ]
+  },
   "dependencies": {
     "@babel/plugin-proposal-private-methods": "^7.18.6",
     "@rails/actioncable": "^6.0.0",
